@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Giphy API Starter</title>
-    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="styles/style.css">
 
-    <script src="vendors/angular.min.js"></script>
-    <script src="scripts/client.js"></script>
-    <script src="scripts/controllers/search.controller.js"></script>
-  </head>
-  <body ng-app="giphyApp">
+<head>
+  <meta charset="utf-8">
+  <title>Giphy API Starter</title>
+  <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="styles/style.css">
+
+  <script src="vendors/angular.min.js"></script>
+  <script src="scripts/client.js"></script>
+  <script src="scripts/controllers/search.controller.js"></script>
+</head>
+
+<body ng-app="giphyApp">
     <div class="container">
       <h1>Giphy API Starter</h1>
-      <div ng-controller="SearchController">
+      <div ng-controller="SearchController as vm">
+        <pre>{{vm.randomImage | json}}</pre>
+        <img ng-src="{{vm.randomImage}}">
         <!-- Random button, text field and search button go here -->
+        <button ng-click="vm.randomSearch()">Find new random image</button>
 
-        <!-- Display results here using ng-repeat -->
+        <!-- Display search results here using ng-repeat -->
+        <!-- <pre>{{vm.searchResults | json}}</pre> -->
+        <div ng-repeat="gif in vm.searchResults">
+          <pre>{{gif.images.fixed_width_small.url | json}}</pre>
+          <img ng-src="{{gif.images.fixed_width_small.url}}">
+        </div>
       </div>
     </div>
   </body>
+
 </html>
